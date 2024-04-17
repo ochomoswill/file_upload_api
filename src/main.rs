@@ -25,7 +25,6 @@ async fn upload_image(
     // Ensure the upload directory exists or create it
     tokio::fs::create_dir_all(UPLOAD_DIR).await.unwrap();
 
-    let mut res: HashMap<String, String> = HashMap::new();
     while let Some(file) = files.next_field().await.unwrap() {
         // this is the name which is sent in formdata from frontend or whoever called the api, i am
         // using it as category, we can get the filename from file data
@@ -42,8 +41,6 @@ async fn upload_image(
             &category,
             &name
         );
-
-        println!("Length of `{}` is {} bytes", name, data.len());
 
         println!("key `{}`", key);
 
@@ -72,9 +69,6 @@ async fn upload_image(
 async fn main() {
     // configuration logging and initiate it
     tracing_subscriber::registry()
-        .with(tracing_subscriber::EnvFilter::new(
-            std::env::var("RUST_LOG").unwrap_or_else(|_| "aws-s3-file-upload-api-rust=debug".into()),
-        ))
         .with(tracing_subscriber::fmt::layer())
         .init();
 
@@ -85,7 +79,7 @@ async fn main() {
     let app = Router::new()
 
         // route for testing if api is running correctly
-        .route("/", get(|| async move { "welcome to Image upload api" }))
+        .route("/", get(|| async move { "File Upload API" }))
 
         //route for uploading image or any file
         .route("/upload", post(upload_image))
