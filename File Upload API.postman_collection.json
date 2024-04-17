@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "21b8d870-36cb-4f22-a68c-c86f2456e115",
+		"name": "File Upload API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2543413"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}",
+					"host": [
+						"{{base_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Files",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "awards",
+							"type": "file",
+							"src": "/Users/ochomoswill/Downloads/WhatsApp Image 2024-04-15 at 13.01.19.jpeg"
+						},
+						{
+							"key": "awards",
+							"type": "file",
+							"src": "/Users/ochomoswill/Downloads/Rubia.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}upload",
+					"host": [
+						"{{base_url}}upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get File",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}static/17042024073725_awards_Rubia.jpeg",
+					"host": [
+						"{{base_url}}static"
+					],
+					"path": [
+						"17042024073725_awards_Rubia.jpeg"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "0.0.0.0:3000/",
+			"type": "string"
+		}
+	]
+}

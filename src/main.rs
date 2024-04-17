@@ -1,17 +1,16 @@
 use axum::{
     extract::Multipart,
     http::StatusCode,
-    routing::{get, post},
-    Extension, Json, Router,
+    routing::{get, post}, Json, Router,
 };
-use std::collections::HashMap;
+
 use tracing_subscriber::{prelude::__tracing_subscriber_SubscriberExt, util::SubscriberInitExt};
 use tokio::fs::File;
-use std::path::Path;
+
 use tokio::io::AsyncWriteExt;
 use std::path::PathBuf;
 use tower_http::{
-    services::{ServeDir, ServeFile},
+    services::{ServeDir},
     trace::TraceLayer,
 };
 // Specify your desired upload folder here
@@ -50,7 +49,7 @@ async fn upload_image(
             Ok(mut file) => {
                 file.write_all(&data).await.unwrap();
             },
-            Err(e) => return Ok(Json(serde_json::json!({
+            Err(_e) => return Ok(Json(serde_json::json!({
                                  "status": "error",
                                  "message": "Error creating file"
                             }))),
